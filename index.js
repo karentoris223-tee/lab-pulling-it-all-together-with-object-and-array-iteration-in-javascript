@@ -114,3 +114,204 @@ function gameObject() {
         },
     };
 }
+
+function numPointsScored(playerName) {
+
+const game = gameObject();
+  const teams = [game.home, game.away];
+  for (const team of teams) {
+    const players = team.players;
+    if (playerName in players) {
+        const player = players[playerName];
+return player.points;
+}
+
+}
+}
+console.log(numPointsScored("Ben Gordon"));
+
+
+function shoeSize(playerName) {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    for (const team of teams) {
+        const players = team.players;
+
+        if (playerName in players) {
+            const player = players[playerName];
+            return player.shoe;
+        }
+    }
+}
+
+
+function teamColors(teamName) {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    for (const team of teams) {
+        if (team.teamName === teamName) {
+            return team.colors;
+        }
+    }
+}
+
+
+function teamNames() {
+    const game = gameObject();
+
+    return [game.home.teamName, game.away.teamName];
+}
+
+
+function playerNumbers(teamName) {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    for (const team of teams) {
+        if (team.teamName === teamName) {
+            const players = team.players;
+            const numbers = [];
+
+            for (const playerName in players) {
+                numbers.push(players[playerName].number);
+            }
+
+            return numbers;
+        }
+    }
+}
+
+
+function playerStats(playerName) {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    for (const team of teams) {
+        const players = team.players;
+
+        if (playerName in players) {
+            return players[playerName];
+        }
+    }
+}
+
+
+function bigShoeRebounds() {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    let biggestShoe = 0;
+    let rebounds = 0;
+
+    for (const team of teams) {
+        const players = team.players;
+
+        for (const playerName in players) {
+            const player = players[playerName];
+
+            if (player.shoe > biggestShoe) {
+                biggestShoe = player.shoe;
+                rebounds = player.rebounds;
+            }
+        }
+    }
+
+    return rebounds;
+}
+
+
+function mostPointsScored() {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    let highestPoints = 0;
+    let topPlayer = "";
+
+    for (const team of teams) {
+        const players = team.players;
+
+        for (const playerName in players) {
+            const player = players[playerName];
+
+            if (player.points > highestPoints) {
+                highestPoints = player.points;
+                topPlayer = playerName;
+            }
+        }
+    }
+
+    return topPlayer;
+}
+
+
+function winningTeam() {
+    const game = gameObject();
+
+    let homePoints = 0;
+    let awayPoints = 0;
+
+    for (const playerName in game.home.players) {
+        homePoints += game.home.players[playerName].points;
+    }
+
+    for (const playerName in game.away.players) {
+        awayPoints += game.away.players[playerName].points;
+    }
+
+    if (homePoints > awayPoints) {
+        return game.home.teamName;
+    } else {
+        return game.away.teamName;
+    }
+}
+
+
+function playerWithLongestName() {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    let longestName = "";
+
+    for (const team of teams) {
+        const players = team.players;
+
+        for (const playerName in players) {
+            if (playerName.length > longestName.length) {
+                longestName = playerName;
+            }
+        }
+    }
+
+    return longestName;
+}
+
+
+function doesLongNameStealATon() {
+    const game = gameObject();
+    const teams = [game.home, game.away];
+
+    let longestName = "";
+    let longestNameSteals = 0;
+    let mostSteals = 0;
+
+    for (const team of teams) {
+        const players = team.players;
+
+        for (const playerName in players) {
+            const player = players[playerName];
+
+            if (playerName.length > longestName.length) {
+                longestName = playerName;
+                longestNameSteals = player.steals;
+            }
+
+            if (player.steals > mostSteals) {
+                mostSteals = player.steals;
+            }
+        }
+    }
+
+    return longestNameSteals === mostSteals;
+}
